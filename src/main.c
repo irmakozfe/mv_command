@@ -29,14 +29,19 @@ int main(int argc, char *argv[]) {
     // 2. Durum: Her ikisi de dizin
     else if (!source_is_file && !destination_is_file) {
         if (file_exists(destination)) {
-            fprintf(stderr, "Destination directory '%s' already exists.\n", destination);
-            return 1; // Hata: Hedef dizin zaten mevcut
+            if (mvMoveDirToDir(source, destination) == 0) {
+                printf("Directory '%s' moved to directory '%s'\n", source, destination);
+            } else {
+                fprintf(stderr, "Failed to move directory to directory.\n");
+            }
+        }else {
+            if (mvRenameDir(source, destination) == 0) {
+                printf("Directory renamed from '%s' to '%s'\n", source, destination);
+            } else {
+                fprintf(stderr, "Failed to rename directory.\n");
+            }
         }
-        if (mvRenameDir(source, destination) == 0) {
-            printf("Directory renamed from '%s' to '%s'\n", source, destination);
-        } else {
-            fprintf(stderr, "Failed to rename directory.\n");
-        }
+
     }
     // 3. Durum: Kaynak dosya, hedef dizin
     else if (source_is_file && !destination_is_file) {
@@ -44,19 +49,6 @@ int main(int argc, char *argv[]) {
             printf("File '%s' moved to directory '%s'\n", source, destination);
         } else {
             fprintf(stderr, "Failed to move file to directory.\n");
-        }
-    }
-    // 4. Durum: Kaynak dizin, hedef dizin
-    else if (!source_is_file && !destination_is_file) {
-        if (file_exists(destination)) {
-            if (mvMoveDirToDir(source, destination) == 0) {
-                printf("Directory '%s' moved to directory '%s'\n", source, destination);
-            } else {
-                fprintf(stderr, "Failed to move directory to directory.\n");
-            }
-        } else {
-            fprintf(stderr, "Destination directory '%s' does not exist.\n", destination);
-            return 1; // Hata: Hedef dizin mevcut değil
         }
     }
 

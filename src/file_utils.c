@@ -2,7 +2,7 @@
 
 int file_exists(const char *filename) {
     if (access(filename, F_OK) != 0) {
-        perror("Source file not found");
+        //perror("Source file not found");
         return 0;
     }
     return 1;
@@ -10,7 +10,7 @@ int file_exists(const char *filename) {
 
 int delete_file(const char *filename) {
     if (remove(filename) != 0) {
-        perror("Error deleting file");
+        //perror("Error deleting file");
         return -1;
     }
     return 0;
