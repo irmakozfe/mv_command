@@ -2,9 +2,9 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
-#include "/Users/buseokcu/CLionProjects/deneme2/include/move_utils.h"
-#include "/Users/buseokcu/CLionProjects/deneme2/include/file_utils.h"
-#include "/Users/buseokcu/CLionProjects/deneme2/include/linked_list.h"
+#include "/Users/buseokcu/CLionProjects/mv_command/include/file_utils.h"
+#include "/Users/buseokcu/CLionProjects/mv_command/include/move_utils.h"
+#include "/Users/buseokcu/CLionProjects/mv_command/include/linked_list.h"
 
 int main(int argc, char *argv[]) {
     if (argc < 3) {

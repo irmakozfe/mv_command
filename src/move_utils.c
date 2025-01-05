@@ -1,4 +1,4 @@
-#include "/Users/buseokcu/CLionProjects/deneme2/include/move_utils.h"
+#include "/Users/buseokcu/CLionProjects/mv_command/include/move_utils.h"
 #include <stdio.h>
 #include <string.h>
 

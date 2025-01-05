@@ -1,7 +1,3 @@
-//
-// Created by Buse Okcu on 28.12.24.
-//
-
 #ifndef MOVE_UTILS_H
 #define MOVE_UTILS_H
 

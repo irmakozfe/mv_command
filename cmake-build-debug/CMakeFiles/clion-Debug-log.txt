@@ -1,1 +1,1 @@
-CMakeLists.txt not found in /Users/buseokcu/CLionProjects/deneme2 Select CMakeLists.txt
+CMakeLists.txt not found in /Users/buseokcu/CLionProjects/mv_command Select CMakeLists.txt
