@@ -3,7 +3,7 @@ CC = gcc
 CFLAGS = -Wall -Wextra -std=c11
 
 # Hedef dosya adı
-TARGET = main
+TARGET = mv
 
 # Kaynak dosyaları
 SRC_DIR = src
