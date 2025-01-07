@@ -10,18 +10,16 @@
 
 pthread_mutex_t resource_semaphore;
 
-// Thread argümanları için yapı
 typedef struct {
     const char *source;
     const char *destination;
     int is_file;
 } thread_args_t;
 
-// Thread fonksiyonu
 void *thread_function(void *arg) {
     thread_args_t *args = (thread_args_t *)arg;
 
-    pthread_mutex_lock(&resource_semaphore); // Kaynağı kilitle
+    pthread_mutex_lock(&resource_semaphore); 
 
     // Dosya mı yoksa dizin mi kontrol et
     if (args->is_file) {
@@ -37,32 +35,32 @@ void *thread_function(void *arg) {
             fprintf(stderr, "Failed to move directory '%s'\n", args->source);
         }
     }
-    pthread_mutex_unlock(&resource_semaphore); // Kaynağı serbest bırak
-    free(args); // Dinamik belleği serbest bırak
+    pthread_mutex_unlock(&resource_semaphore); 
+    free(args); 
     return NULL;
 }
 
 int main(int argc, char *argv[]) {
-    pthread_mutex_init(&resource_semaphore, NULL); // Aynı anda 2 thread erişebilir
+    pthread_mutex_init(&resource_semaphore, NULL); 
     if (argc < 3) {
         fprintf(stderr, "Usage: %s <source1> <source2> ... <destination>\n", argv[0]);
-        return 1; // Hatalı kullanım
+        return 1; 
     }
 
     if (argc > 3) {
-        const char *destination = argv[argc - 1]; // Son argüman hedef dizin
-        Node *head = NULL; // Bağlı liste başı
+        const char *destination = argv[argc - 1]; 
+        Node *head = NULL; 
 
         for (int i = 1; i < argc - 1; i++) {
             append_node(&head, argv[i]);
         }
 
-        pthread_t threads[argc - 2]; // Kaynak dosyalar kadar thread
+        pthread_t threads[argc - 2]; 
         int thread_count = 0;
 
         Node *current = head;
         while (current != NULL) {
-            // Thread argümanlarını oluştur
+            
             thread_args_t *args = malloc(sizeof(thread_args_t));
             if (!args) {
                 fprintf(stderr, "Memory allocation failed.\n");
@@ -74,7 +72,7 @@ int main(int argc, char *argv[]) {
             args->destination = destination;
             args->is_file = !is_file(current->file_path);
 
-            // Thread oluştur
+            
             if (pthread_create(&threads[thread_count], NULL, thread_function, (void *)args) != 0) {
                 fprintf(stderr, "Error creating thread.\n");
                 free(args);
@@ -82,16 +80,16 @@ int main(int argc, char *argv[]) {
                 return 1;
             }
 
-            current = current->next; // Sonraki düğüme geç
+            current = current->next; 
             thread_count++;
         }
 
-        // Tüm thread'lerin tamamlanmasını bekle
+        
         for (int i = 0; i < thread_count; i++) {
             pthread_join(threads[i], NULL);
         }
 
-        // Bağlı listeyi serbest bırak
+        
         free_list(head);
 
         printf("All tasks completed successfully.\n");
@@ -100,11 +98,11 @@ int main(int argc, char *argv[]) {
         const char *source = argv[1];
         const char *destination = argv[2];
 
-        // Dosya mı yoksa dizin mi olduğunu kontrol et
+        
         int source_is_file = !is_file(source);
         int destination_is_file = !is_file(destination);
 
-        // 1. Durum: Her ikisi de dosya
+        
         if (source_is_file && destination_is_file) {
             if (mvRenameFile(source, destination) == 0) {
                 printf("File renamed from '%s' to '%s'\n", source, destination);
@@ -112,7 +110,7 @@ int main(int argc, char *argv[]) {
                 fprintf(stderr, "Failed to rename file.\n");
             }
         }
-        // 2. Durum: Her ikisi de dizin
+        
         else if (!source_is_file && !destination_is_file) {
             if (file_exists(destination)) {
                 if (mvMoveDirToDir(source, destination) == 0) {
@@ -129,7 +127,7 @@ int main(int argc, char *argv[]) {
             }
 
         }
-        // 3. Durum: Kaynak dosya, hedef dizin
+        
         else if (source_is_file && !destination_is_file) {
             if (mvMoveFileToDir(source, destination) == 0) {
                 printf("File '%s' moved to directory '%s'\n", source, destination);
@@ -139,6 +137,6 @@ int main(int argc, char *argv[]) {
         }
 
         pthread_mutex_destroy(&resource_semaphore);
-        return 0; // Başarılı
+        return 0; 
     }
 }
