@@ -3,6 +3,7 @@
 #include <string.h>
 #include <unistd.h>
 #include <pthread.h>
+#include <getopt.h>
 #include "/Users/buseokcu/CLionProjects/mv_command/include/move_utils.h"
 #include "/Users/buseokcu/CLionProjects/mv_command/include/file_utils.h"
 #include "/Users/buseokcu/CLionProjects/mv_command/include/linked_list.h"
@@ -50,36 +51,37 @@ void print_help() {
 
 //bayraklari ayristirmak icin
 void parse_flags(int argc, char *argv[], int *non_flag_index) {
-    for (int i = 1; i < argc; i++) {
-        if (argv[i][0] == '-') { // Bayrakları kontrol et
-            for (int j = 1; argv[i][j] != '\0'; j++) {
-                switch (argv[i][j]) {
-                    case 'f':
-                        option_force = 1;
-                    break;
-                    case 'i':
-                        option_interactive = 1;
-                    break;
-                    case 'n':
-                        option_no_clobber = 1;
-                    break;
-                    case 'v':
-                        option_verbose = 1;
-                    break;
-                    case 'h':
-                        option_help = 1;
-                    break;
-                    default:
-                        fprintf(stderr, "mv: illegal option -- %c\n", argv[i][j]);
-                    return;
-                }
-            }
-        } else {
-            // Bayrak olmayan ilk argümanın indeksini kaydet
-            *non_flag_index = i;
-            return;
+    int opt;
+    while ((opt = getopt_long(argc, argv, "finvhb", long_options, NULL)) != -1) {
+        switch (opt) {
+            case 'f':
+                option_force = 1;
+            break;
+            case 'i':
+                option_interactive = 1;
+            break;
+            case 'n':
+                option_no_clobber = 1;
+            break;
+            case 'v':
+                option_verbose = 1;
+            break;
+            case 'b':
+                option_backup = 1;
+            break;
+            case 'h':
+                option_help = 1;
+            break;
+            case '?': // Geçersiz bayrak
+                default:
+                    fprintf(stderr, "mv: illegal option\n");
+            print_help();
+            exit(1);
         }
     }
+
+    // İlk bayrak olmayan argümanı belirle
+    *non_flag_index = optind;
 }
 
 

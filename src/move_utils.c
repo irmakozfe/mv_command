@@ -5,6 +5,8 @@
 #include <string.h>
 
 int mvRenameFile(const char *source_file, const char *new_name) {
+
+
   if (!option_force) {
         if (option_no_clobber && access(new_name, F_OK) == 0) {
             if (option_verbose) {
@@ -24,9 +26,24 @@ int mvRenameFile(const char *source_file, const char *new_name) {
         }
     }
 
+    // Eğer -b bayrağı aktifse ve hedef dosya mevcutsa
+    if (option_backup && access(new_name, F_OK) == 0) {
+        char backup_name[4096];
+        snprintf(backup_name, sizeof(backup_name), "%s~", new_name);
+
+        // Hedef dosyanın yedeğini oluştur
+        if (rename(new_name, backup_name) != 0) {
+            perror("mv: backup creation failed");
+            return -1; // Yedekleme başarısız
+        }
+
+        if (option_verbose) {
+            printf("%s -> %s (backup: '%s~')\n", source_file, new_name, backup_name);
+        }
+    }
 
     if (rename(source_file, new_name) == 0) {
-      if (option_verbose) {
+      if (option_verbose && !option_backup) {
             printf("%s -> %s\n", source_file, new_name);
         }
         return 0; // Başarılı
