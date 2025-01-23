@@ -32,11 +32,10 @@
 ### Voraussetzungen
 *Stellen Sie sicher, dass die folgenden Pakete installiert sind:*
 
-`
-gcc --version
-make --version
-git --version
-`
+`gcc --version`
+`make --version`
+`git --version`
+
 
 *Falls nicht installiert, können Sie sie mit den folgenden Befehlen hinzufügen:*
 
@@ -46,42 +45,30 @@ brew install gcc make git
 `
 
 **Für Linux:**
-`
-sudo apt update
-sudo apt install build-essential git
-`
+`sudo apt update`
+`sudo apt install build-essential git`
 
 ### Repository klonen
-`
-git clone https://github.com/bussyyr/mv_command.git
-cd mv_command
-make all
-`
+`git clone https://github.com/bussyyr/mv_command.git`
+`cd mv_command`
+`make all`
 
 ### Projekt kompilieren
 Nutzen Sie das mitgelieferte Makefile:
-`
-make all
-`
+`make all`
 
 ### Programm ausführen
 Führen Sie das Programm mit entsprechenden Argumenten aus:
-`
-./mv_command [optionen] [quelle] [ziel]
-`
+`./mv_command [optionen] [quelle] [ziel]`
 
 **Beispiele:**
-`
-./mv_command datei1.txt /ziel/ordner/
-./mv_command -f datei1.txt /ziel/ordner/
-./mv_command quellordner /ziel/ordner/
-`
+`./mv_command datei1.txt /ziel/ordner/`
+`./mv_command -f datei1.txt /ziel/ordner/`
+`./mv_command quellordner /ziel/ordner/`
 
 ### Build bereinigen
 Um erstellte Dateien zu entfernen:
-`
-make clean
-`
+`make clean`
 
 ## Befehlszeilenoptionen
 - `-f`: Erzwingt das Verschieben.
@@ -103,21 +90,15 @@ make clean
 
 ## Pipeline-Integration
 *Das Programm kann mit anderen Linux-Befehlen kombiniert werden:*
-`
-echo 'testfile.txt' | ./mv_command -v /ziel/ordner/
-`
+`echo 'testfile.txt' | ./mv_command -v /ziel/ordner/`
 
 ## Tests
 *Tests sind in der Datei `tests.c` enthalten. Um alle Tests auszuführen:*
-`
-make test
-`
+`make test`
 
 ## Speicheranalyse
 *Zur Überprüfung auf Speicherlecks kann Valgrind verwendet werden:*
-`
-valgrind --leak-check=full ./mv_command test.txt /ziel/
-`
+`valgrind --leak-check=full ./mv_command test.txt /ziel/`
 
 ## Mitwirkende
 - [Buse Okcu](https://github.com/bussyyr)
