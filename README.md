@@ -1,4 +1,4 @@
-# mv_command: Eingeschränkter `mv`-Befehl in C
+# mv_command: `mv`-Befehl in C
 
 ## Einführung
 *Dieses Projekt ist eine Implementierung eines eingeschränkten `mv`-Befehls in C. Es wurde als Teil der System-oriented Programming Portfolio Assignment 05 entwickelt und demonstriert verschiedene Fähigkeiten in der C-Programmierung, einschließlich Interaktion mit dem Linux-Dateisystem, dynamischer Speicherverwaltung und Multithreading.*
