@@ -44,7 +44,7 @@ sudo apt install build-essential git
 
 git clone https://github.com/bussyyr/mv_command.git
 cd mv_command
-
+make all
 
 ~Projekt kompilieren
 Nutzen Sie das mitgelieferte Makefile:
@@ -71,13 +71,31 @@ make clean
 
 
 >Befehlszeilenoptionen
-- `-f`: Erzwingt das Verschieben von Dateien.
-- `-r`: Rekursives Verschieben von Verzeichnissen.
-- `-v`: Ausführliche Ausgabe anzeigen.
-- `--help`: Zeigt Hilfeinformationen.
-- `-i`: Fordert vor dem Überschreiben einer Datei eine Bestätigung an.
-- `-u`: Verschiebt nur, wenn die Zieldatei älter ist.
-- `-n`: Überschreibt keine vorhandenen Dateien.
+-f: Erzwingt das Verschieben.
+
+-r: Rekursives Verschieben.
+
+-v: Detaillierte Ausgabe.
+
+--help: Zeigt Hilfeinformationen.
+
+-i: Bestätigung vor Überschreiben.
+
+-u: Verschiebt nur neuere Dateien.
+
+-n: Keine vorhandenen Dateien überschreiben.
+
+-l: Behandelt symbolische Links.
+
+--backup[=control]: Erstellt eine Sicherung der bestehenden Datei.
+
+-t: Verschiebt Dateien in einen angegebenen Ordner.
+
+-T: Behandelt das Ziel als Datei und nicht als Verzeichnis.
+
+--verbose: Zeigt detaillierte Informationen zu jeder Aktion.
+
+--strip-trailing-slashes: Entfernt nachfolgende Schrägstriche vom Quellpfad.
 
 >Multithreading
 Das Programm verwendet Threads, um Dateioperationen parallel auszuführen. Mutexe werden verwendet, um Datenkonsistenz sicherzustellen.
