@@ -4,10 +4,10 @@
 #include <unistd.h>
 #include <pthread.h>
 #include <getopt.h>
-#include "/Users/buseokcu/CLionProjects/mv_command/include/move_utils.h"
-#include "/Users/buseokcu/CLionProjects/mv_command/include/file_utils.h"
-#include "/Users/buseokcu/CLionProjects/mv_command/include/linked_list.h"
-#include "/Users/buseokcu/CLionProjects/mv_command/include/globals.h"
+#include "../include/move_utils.h"
+#include "../include/file_utils.h"
+#include "../include/linked_list.h"
+#include "../include/globals.h"
 #include <semaphore.h>
 
 pthread_mutex_t resource_semaphore;

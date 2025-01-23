@@ -1,5 +1,5 @@
-#include "/Users/buseokcu/CLionProjects/mv_command/include/move_utils.h"
-#include "/Users/buseokcu/CLionProjects/mv_command/include/globals.h"
+#include "../include/move_utils.h"
+#include "../include/globals.h"
 #include <stdio.h>
 #include <unistd.h>
 #include <string.h>

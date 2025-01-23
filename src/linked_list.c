@@ -1,4 +1,4 @@
-#include "/Users/buseokcu/CLionProjects/mv_command/include/linked_list.h"
+#include "../include/linked_list.h"
 #include <stdlib.h>
 #include <string.h>
 

@@ -1,4 +1,4 @@
-#include "/Users/buseokcu/CLionProjects/mv_command/include/globals.h"
+#include "../include/globals.h"
 #include <getopt.h>
 
 int option_force = 0; // -f (-i ve -n etkisiz hale getirir)
