@@ -120,9 +120,8 @@ valgrind --leak-check=full ./mv_command test.txt /ziel/
 
 >Mitwirkende
 - [Buse Okcu](https://github.com/bussyyr)
-- [Nihal Beyza Dogan](https://github.com/nihalbeyzadogan)
 - [Irmak Damla Özdemir](https://github.com/irmakozfe)
-
+- [Nihal Beyza Dogan](https://github.com/nihalbeyzadogan)
 ---
 Für Fragen oder Feedback wenden Sie sich bitte über GitHub Issues an uns.
 
