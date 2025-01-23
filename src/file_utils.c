@@ -1,3 +1,6 @@
+#include <stdio.h>
+#include <unistd.h>
+#include <string.h>
 #include "../include/file_utils.h"
 
 int file_exists(const char *filename) {
