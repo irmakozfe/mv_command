@@ -8,6 +8,8 @@
 #include "../include/linked_list.h"
 #include "../include/globals.h"
 #include <semaphore.h>
+#include <string.h>
+#define BUFFER_SIZE 4096
 
 pthread_mutex_t resource_semaphore;
 
@@ -41,6 +43,15 @@ void *thread_function(void *arg) {
     pthread_mutex_unlock(&resource_semaphore); // Kaynağı serbest bırak
     free(args); // Dinamik belleği serbest bırak
     return NULL;
+}
+
+void read_from_stdin(char *buffer, size_t size) {
+    if (fgets(buffer, size, stdin) != NULL) {
+        size_t len = strlen(buffer);
+        if (len > 0 && buffer[len - 1] == '\n') {
+            buffer[len - 1] = '\0'; // Yeni satır karakterini kaldır
+        }
+    }
 }
 
 void print_help() {
@@ -87,14 +98,53 @@ void parse_flags(int argc, char *argv[], int *non_flag_index) {
 
 int main(int argc, char *argv[]) {
     pthread_mutex_init(&resource_semaphore, NULL); // Aynı anda 2 thread erişebilir
+    char buffer[BUFFER_SIZE];
 
     ///yeni
     int non_flag_index = -1; // Bayrak olmayan ilk argümanın indeksini tutacak
     parse_flags(argc, argv, &non_flag_index);
 
+
     if (argc == 2 && option_help) {
         print_help();
         return 0; // Başarılı sonlanma
+    }
+
+    if (argc == 2) {
+        // Hedef argümanı olarak argv[1]'i kullan
+        const char *destination = argv[1];
+
+        // stdin'den oku
+        read_from_stdin(buffer, BUFFER_SIZE);
+        const char *source = buffer; // stdin'den alınan girdiyi kaynak olarak ata
+
+        // Kaynak dosya/dizin, hedefe taşınacak
+        int source_is_file = !is_file(source);
+        int destination_is_file = !is_file(destination);
+
+        // 1. Durum: Kaynak dosya, hedef dizin
+        if (source_is_file && !destination_is_file) {
+            if (mvMoveFileToDir(source, destination) == 0) {
+                printf("File '%s' moved to directory '%s'\n", source, destination);
+            } else {
+                fprintf(stderr, "Failed to move file to directory '%s'\n", destination);
+            }
+        }
+        // 2. Durum: Kaynak ve hedef dizin
+        else if (!source_is_file && !destination_is_file) {
+            if (mvMoveDirToDir(source, destination) == 0) {
+                printf("Directory '%s' moved to directory '%s'\n", source, destination);
+            } else {
+                fprintf(stderr, "Failed to move directory '%s'\n", source);
+            }
+        }
+        // Diğer durumlar için hata mesajı
+        else {
+            fprintf(stderr, "Invalid source and destination combination.\n");
+        }
+
+        pthread_mutex_destroy(&resource_semaphore);
+        return 0; // Başarılı
     }
 
 
