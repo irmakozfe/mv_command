@@ -7,7 +7,7 @@ TARGET = mv
 
 # Kaynak dosyaları
 SRC_DIR = src
-SOURCES = $(SRC_DIR)/main.c $(SRC_DIR)/file_utils.c $(SRC_DIR)/linked_list.c $(SRC_DIR)/move_utils.c
+SOURCES = $(SRC_DIR)/main.c $(SRC_DIR)/file_utils.c $(SRC_DIR)/linked_list.c $(SRC_DIR)/move_utils.c $(SRC_DIR)/globals.c
 
 # Nesne dosyaları
 OBJECTS = $(SOURCES:.c=.o)
