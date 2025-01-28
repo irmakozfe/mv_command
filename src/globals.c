@@ -1,5 +1,6 @@
 #include "../include/globals.h"
 #include <getopt.h>
+#include <stddef.h>
 
 int option_force = 0; // -f (-i ve -n etkisiz hale getirir)
 int option_interactive = 0; //-i (onay istemesi)
