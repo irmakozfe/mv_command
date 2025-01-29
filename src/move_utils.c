@@ -134,6 +134,21 @@ int mvMoveDirToDir(const char *source_dir, const char *target_dir) {
     char target_path[4096];
     snprintf(target_path, sizeof(target_path), "%s/%s", target_dir, strrchr(source_dir, '/') ? strrchr(source_dir, '/') + 1 : source_dir);
 
+    if (option_backup && access(target_path, F_OK) == 0) {
+        char backup_name[4096];
+        snprintf(backup_name, sizeof(backup_name), "%s~", target_path);
+
+        
+        if (rename(target_path, backup_name) != 0) {
+            perror("Error creating backup before moving directory");
+            return 1; 
+        }
+
+        if (option_verbose) {
+            printf("%s -> %s (backup: '%s')\n", target_path, backup_name, backup_name);
+        }
+    }   	
+	
     if (!option_force) {
         if (option_no_clobber && access(target_path, F_OK) == 0) {
             if (option_verbose) {
