@@ -100,20 +100,20 @@ int mvMoveFileToDir(const char *source, const char *destination_dir) {
             	return 0; // İşlem iptal edildi
         }
 
-        if (option_interactive && access(destination, F_OK) == 0) {
-            printf("overwrite '%s'? (y/n [n]): ", destination);
-            char response = getchar();
-            while (getchar() != '\n'); // Giriş tamponunu temizle
-            if (response != 'y' && response != 'Y') {
-		    if (remove(destination) != 0) { // Eğer kullanıcı onay verdiyse hedefi sil
-                    perror("Error removing existing file after user confirmation");
-                    return 1; // Silme başarısız
-                }
-	    }else {
-                printf("not overwritten\n");
-                return 1; // İşlem iptal edildi
-            }
+    if (option_interactive && access(destination, F_OK) == 0) {
+    printf("overwrite '%s'? (y/n [n]): ", destination);
+    char response = getchar();
+    while (getchar() != '\n'); // Giriş tamponunu temizle
+    if (response == 'y' || response == 'Y') {
+        if (remove(destination) != 0) {
+            perror("Error removing existing file after user confirmation");
+            return 1; 
         }
+    } else {
+        printf("'%s' not overwritten\n", destination);
+        return 1; 
+    		}
+	}
     }
 
     // Dosyayı taşımayı dene
