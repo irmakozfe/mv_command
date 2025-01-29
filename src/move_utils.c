@@ -72,8 +72,15 @@ int mvMoveFileToDir(const char *source, const char *destination_dir) {
 
     // Hedef dosya yolunu oluştur
     snprintf(destination, sizeof(destination), "%s/%s", destination_dir, strrchr(source, '/') ? strrchr(source, '/') + 1 : source);
-
-   if (!option_force) {
+    
+	if (option_force) {
+        if (access(destination, F_OK) == 0) { 
+            if (remove(destination) != 0) {
+                perror("Error removing existing file before move");
+                return 1; 
+            }
+        }
+    } else {
         if (option_no_clobber && access(destination, F_OK) == 0) {
             if (option_verbose) {
                 printf("'%s' not overwritten\n", destination);
