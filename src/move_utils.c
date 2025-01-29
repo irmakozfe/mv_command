@@ -72,7 +72,21 @@ int mvMoveFileToDir(const char *source, const char *destination_dir) {
 
     // Hedef dosya yolunu oluştur
     snprintf(destination, sizeof(destination), "%s/%s", destination_dir, strrchr(source, '/') ? strrchr(source, '/') + 1 : source);
-    
+
+	if (option_backup && access(destination, F_OK) == 0) {
+        char backup_name[4096];
+        snprintf(backup_name, sizeof(backup_name), "%s~", destination);  
+
+        if (rename(destination, backup_name) != 0) {
+            perror("Error creating backup before move");
+            return 1; 
+        }
+
+        if (option_verbose) {
+            printf("%s -> %s (backup: '%s')\n", destination, backup_name, backup_name);
+        }
+    }
+	
 	if (option_force) {
         if (access(destination, F_OK) == 0) { 
             if (remove(destination) != 0) {
