@@ -82,10 +82,8 @@ int mvMoveFileToDir(const char *source, const char *destination_dir) {
         }
     } else {
         if (option_no_clobber && access(destination, F_OK) == 0) {
-            if (option_verbose) {
                 printf("'%s' not overwritten\n", destination);
-            }
-            return 1; // İşlem iptal edildi
+            	return 0; // İşlem iptal edildi
         }
 
         if (option_interactive && access(destination, F_OK) == 0) {
