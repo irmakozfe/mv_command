@@ -93,6 +93,11 @@ int mvMoveFileToDir(const char *source, const char *destination_dir) {
             char response = getchar();
             while (getchar() != '\n'); // Giriş tamponunu temizle
             if (response != 'y' && response != 'Y') {
+		    if (remove(destination) != 0) { // Eğer kullanıcı onay verdiyse hedefi sil
+                    perror("Error removing existing file after user confirmation");
+                    return 1; // Silme başarısız
+                }
+	    }else {
                 printf("not overwritten\n");
                 return 1; // İşlem iptal edildi
             }
@@ -102,10 +107,11 @@ int mvMoveFileToDir(const char *source, const char *destination_dir) {
     // Dosyayı taşımayı dene
     if (rename(source, destination) == 0) {
       if (option_verbose) {
-            printf("%s -> %s\n", source, destination);
+            printf("Moved: %s -> %s\n", source, destination);
         }
         return 0; // Taşıma başarılı
     } else {
+	fprintf(stderr, "Error moving file: %s -> %s\n", source, destination);
         perror("Error moving file");
         return 1; // Taşıma başarısız
     }
