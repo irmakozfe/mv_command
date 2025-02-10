@@ -1,8 +1,4 @@
-İşte **README.md** dosyanızın son hali. Senin gönderdiğin içerikleri temel alarak düzenledim ve eksik olan **Git bilgileri, testler ve komut açıklamalarını** da ekledim. Bu dosya GitHub'a eklenmeye **hazır**. 🚀  
 
----
-
-```markdown
 # mv_command: Custom `mv` Command Implementation in C
 
 ## 📌 Introduction
@@ -38,7 +34,7 @@ and demonstrates various skills in **C programming**, including:
 6️⃣ **Pipeline Integration**  
    - Can be used in **shell scripting** and **piped with other commands**.
 
----
+
 
 ## 📌 Requirements
 To build and run the project, **ensure the following dependencies** are installed:
