@@ -1,5 +1,4 @@
-
-# mv_command: Custom `mv` Command Implementation in C
+# 🚀 mv_command: Custom `mv` Command Implementation in C
 
 ## 📌 Introduction
 This project is a **C-based implementation** of the `mv` (move) command.  
@@ -17,12 +16,20 @@ and demonstrates various skills in **C programming**, including:
    - Move **single** or **multiple** files and directories.  
    - Overwrite existing files based on user preferences.  
    - Create **backup** files before overwriting (`-b`).  
+   - Move directories recursively (`-r`).  
+   - Handle **symbolic links** (`-l`).  
 2️⃣ **Command-Line Options**  
    - `-f`: **Force move** (overwrite without asking).  
    - `-i`: **Interactive mode** (asks before overwriting).  
    - `-n`: **No clobber** (prevents overwriting).  
    - `-b`: **Backup** existing file before moving.  
    - `-v`: **Verbose mode** (displays actions performed).  
+   - `-r`: **Recursive mode** (move directories recursively).  
+   - `-l`: **Handle symbolic links properly.**  
+   - `-t <directory>`: **Move all files into a specified directory.**  
+   - `-T`: **Treat destination as a file, not a directory.**  
+   - `--strip-trailing-slashes`: **Remove trailing slashes from the source path.**  
+   - `--backup[=control]`: **Create a backup before overwriting.**  
    - `--help`: Shows **usage information**.  
 3️⃣ **Error Handling**  
    - Handles **invalid file paths**, **missing permissions**, and **operation failures**.  
@@ -34,7 +41,7 @@ and demonstrates various skills in **C programming**, including:
 6️⃣ **Pipeline Integration**  
    - Can be used in **shell scripting** and **piped with other commands**.
 
-
+---
 
 ## 📌 Requirements
 To build and run the project, **ensure the following dependencies** are installed:
@@ -46,7 +53,7 @@ To build and run the project, **ensure the following dependencies** are installe
 On **Linux/macOS**, install using:
 ```bash
 sudo apt update && sudo apt install build-essential git
-```
+
 On **MacOS**, install using:
 ```bash
 brew install gcc make git
@@ -92,6 +99,22 @@ Basic syntax:
    ```bash
    ./mv -b file1.txt /destination/folder/
    ```
+5️⃣ **Move directories recursively:**
+   ```bash
+   ./mv -r dir1 /destination/
+   ```
+6️⃣ **Move files while handling symbolic links:**
+   ```bash
+   ./mv -l file_symlink.txt /destination/
+   ```
+7️⃣ **Move files into a specific directory (-t option):**
+   ```bash
+   ./mv -t /destination/ file1.txt file2.txt
+   ```
+8️⃣ **Remove trailing slashes from the source path (--strip-trailing-slashes):**
+   ```bash
+   ./mv --strip-trailing-slashes dir1/ /destination/
+   ```
 
 ---
 
@@ -103,12 +126,13 @@ Basic syntax:
 | `-n` | No clobber (do not overwrite existing files) |
 | `-b` | Backup before overwriting |
 | `-v` | Verbose mode (display move details) |
-| `--help` | Show usage information |
 | `-r` | Recursive move (for directories) |
-| `--backup[=control]` | Create a backup before overwriting |
+| `-l` | Handle symbolic links properly |
+| `-t <directory>` |	Move all files into a specified directory |
 | `-T` | Treat the destination as a file, not a directory |
+| `--backup[=control]` | Create a backup before overwriting |
 | `--strip-trailing-slashes` | Remove trailing slashes from the source path |
-
+| `--help` | Show usage information |
 ---
 
 ## 🔄 **Cleaning the Build**
@@ -136,7 +160,14 @@ Test 2: Multiple files successfully moved!
 Backup created: test3_backup.txt -> test3_backup.txt~
 Test 3: Backup (-b) successful!
 Test 4: Manually press 'y' or 'n' to verify interactive mode!
+Test 5: Recursive move (-r) successful!
+Test 6: Symbolic link move (-l) successful!
+Test 7: Move into directory (-t) successful!
+Test 8: Strip trailing slashes (--strip-trailing-slashes) successful!
+Test 9: Verbose mode (-v) successful!
+Test 10: Help menu (--help) successful!
 All tests completed!
+
 ```
 
 ---
@@ -157,14 +188,6 @@ Examples:
   usage: ./mv [-f | -i | -n] [-hv] source target
          ./mv [-f | -i | -n] [-v] source ... directory
   ```
-
----
-
-## 💡 Future Improvements
-Possible future enhancements include:
-- **Multithreading support** for faster file moves.
-- **GUI-based interaction** for non-terminal users.
-- **Advanced logging system**.
 
 ---
 
