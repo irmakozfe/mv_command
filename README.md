@@ -28,7 +28,6 @@ and demonstrates various skills in **C programming**, including:
    - `-l`: **Handle symbolic links properly.**  
    - `-t <directory>`: **Move all files into a specified directory.**  
    - `-T`: **Treat destination as a file, not a directory.**  
-   - `--strip-trailing-slashes`: **Remove trailing slashes from the source path.**  
    - `--backup[=control]`: **Create a backup before overwriting.**  
    - `--help`: Shows **usage information**.  
 3️⃣ **Error Handling**  
@@ -131,7 +130,6 @@ Basic syntax:
 | `-t <directory>` |	Move all files into a specified directory |
 | `-T` | Treat the destination as a file, not a directory |
 | `--backup[=control]` | Create a backup before overwriting |
-| `--strip-trailing-slashes` | Remove trailing slashes from the source path |
 | `--help` | Show usage information |
 ---
 
@@ -163,7 +161,6 @@ Test 4: Manually press 'y' or 'n' to verify interactive mode!
 Test 5: Recursive move (-r) successful!
 Test 6: Symbolic link move (-l) successful!
 Test 7: Move into directory (-t) successful!
-Test 8: Strip trailing slashes (--strip-trailing-slashes) successful!
 Test 9: Verbose mode (-v) successful!
 Test 10: Help menu (--help) successful!
 All tests completed!
