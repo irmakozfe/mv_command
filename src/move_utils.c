@@ -34,8 +34,9 @@ int mvRenameFile(const char *source_file, const char *new_name) {
 
     if (option_backup && access(new_name, F_OK) == 0) {
     char backup_name[4096];
-    snprintf(backup_name, sizeof(backup_name) - 1, "%s~", new_name);
-    backup_name[sizeof(backup_name) - 1] = '\0';
+    snprintf(backup_name, sizeof(backup_name), "%s~", new_name);
+    backup_name[sizeof(backup_name) - 1] = '\0'; // Taşmayı önler
+    
 
     if (!file_exists(new_name)) {
         fprintf(stderr, "Error: Cannot create backup, source file '%s' does not exist.\n", new_name);
@@ -77,9 +78,8 @@ int mvMoveFileToDir(const char *source, const char *destination_dir) {
 
     if (option_backup && access(destination, F_OK) == 0) {
         char backup_name[4096];
-        snprintf(backup_name, sizeof(backup_name), "%s~", destination);
-        backup_name[sizeof(backup_name) - 1] = '\0'; // Ensure null termination
-
+        snprintf(backup_name, sizeof(backup_name) - 1, "%s~", destination);
+        backup_name[sizeof(backup_name) - 1] = '\0';
 
         if (rename(destination, backup_name) != 0) {
             perror("Backup creation failed before move");
@@ -109,8 +109,10 @@ int mvMoveDirToDir(const char *source_dir, const char *target_dir) {
 
     if (option_backup && access(target_path, F_OK) == 0) {
         char backup_name[4096];
-        snprintf(backup_name, sizeof(backup_name), "%s~", target_path);
-        backup_name[sizeof(backup_name) - 1] = '\0'; // Ensure null termination
+        snprintf(backup_name, sizeof(backup_name) - 1, "%s~", target_path);
+        backup_name[sizeof(backup_name) - 1] = '\0';
+        
+
 
         
         if (rename(target_path, backup_name) != 0) {
