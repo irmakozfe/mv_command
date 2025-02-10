@@ -77,7 +77,7 @@ int mvMoveFileToDir(const char *source, const char *destination_dir) {
 
     if (option_backup && access(destination, F_OK) == 0) {
         char backup_name[4096];
-        snprintf(backup_name, sizeof(backup_name) - 2, "%s~", destination);
+        snprintf(backup_name, sizeof(backup_name), "%s~", destination);
         backup_name[sizeof(backup_name) - 1] = '\0'; // Ensure null termination
 
 
@@ -109,7 +109,7 @@ int mvMoveDirToDir(const char *source_dir, const char *target_dir) {
 
     if (option_backup && access(target_path, F_OK) == 0) {
         char backup_name[4096];
-        snprintf(backup_name, sizeof(backup_name) - 2, "%s~", target_path);
+        snprintf(backup_name, sizeof(backup_name), "%s~", target_path);
         backup_name[sizeof(backup_name) - 1] = '\0'; // Ensure null termination
 
         
