@@ -24,11 +24,6 @@ and demonstrates various skills in **C programming**, including:
    - `-n`: **No clobber** (prevents overwriting).  
    - `-b`: **Backup** existing file before moving.  
    - `-v`: **Verbose mode** (displays actions performed).  
-   - `-r`: **Recursive mode** (move directories recursively).  
-   - `-l`: **Handle symbolic links properly.**  
-   - `-t <directory>`: **Move all files into a specified directory.**  
-   - `-T`: **Treat destination as a file, not a directory.**  
-   - `--backup[=control]`: **Create a backup before overwriting.**  
    - `--help`: Shows **usage information**.  
 3️⃣ **Error Handling**  
    - Handles **invalid file paths**, **missing permissions**, and **operation failures**.  
@@ -98,23 +93,22 @@ Basic syntax:
    ```bash
    ./mv -b file1.txt /destination/folder/
    ```
-5️⃣ **Move directories recursively:**
+5️⃣ **Interactive move (asks before overwriting):**
    ```bash
-   ./mv -r dir1 /destination/
+   ./mv -i file1.txt /destination/folder/
    ```
-6️⃣ **Move files while handling symbolic links:**
-   ```bash
-   ./mv -l file_symlink.txt /destination/
+6️⃣ **Prevent overwriting existing files (-n no clobber mode):**
+  ```bash
+   ./mv -n file1.txt /destination/folder/
    ```
-7️⃣ **Move files into a specific directory (-t option):**
-   ```bash
-   ./mv -t /destination/ file1.txt file2.txt
+7️⃣ **Verbose mode (show actions performed):**
+  ```bash
+   ./mv -v file1.txt /destination/folder/
    ```
-8️⃣ **Remove trailing slashes from the source path (--strip-trailing-slashes):**
-   ```bash
-   ./mv --strip-trailing-slashes dir1/ /destination/
+8️⃣ **Display help message:**
+  ```bash
+   ./mv --help
    ```
-
 ---
 
 ## 📌 Command-Line Options
@@ -125,11 +119,6 @@ Basic syntax:
 | `-n` | No clobber (do not overwrite existing files) |
 | `-b` | Backup before overwriting |
 | `-v` | Verbose mode (display move details) |
-| `-r` | Recursive move (for directories) |
-| `-l` | Handle symbolic links properly |
-| `-t <directory>` |	Move all files into a specified directory |
-| `-T` | Treat the destination as a file, not a directory |
-| `--backup[=control]` | Create a backup before overwriting |
 | `--help` | Show usage information |
 ---
 
@@ -150,19 +139,17 @@ A test script (`test.sh`) is provided to validate the implementation.
 ```
 
 ### ✅ Expected Output:
-If everything is working correctly, you should see:
+If everything is working correctly, you should see (without DEBUG):
 ```
 Test 1: File successfully moved!
 All tasks completed successfully.
 Test 2: Multiple files successfully moved!
 Backup created: test3_backup.txt -> test3_backup.txt~
 Test 3: Backup (-b) successful!
-Test 4: Manually press 'y' or 'n' to verify interactive mode!
-Test 5: Recursive move (-r) successful!
-Test 6: Symbolic link move (-l) successful!
-Test 7: Move into directory (-t) successful!
-Test 9: Verbose mode (-v) successful!
-Test 10: Help menu (--help) successful!
+Test 4: Interactive mode (-i) successful!
+Test 5: No clobber (-n) successful!
+Test 6: Verbose mode (-v) successful!
+Test 7: Help flag (--help) successful!
 All tests completed!
 
 ```
