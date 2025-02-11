@@ -54,7 +54,7 @@ fi
 
 # Test 6: Verbose mode (-v)
 echo "Verbose Test" > test_verbose.txt
-OUTPUT=$(mv -v test_verbose.txt test_dir/ | grep "renamed: 'test_verbose.txt' -> 'test_dir/test_verbose.txt'")
+OUTPUT=$(mv -v test_verbose.txt test_dir/ | grep "renamed: test_verbose.txt -> test_dir/test_verbose.txt")
 if [ -n "$OUTPUT" ]; then
     echo " Test 6: Verbose mode (-v) failed!"
 else
