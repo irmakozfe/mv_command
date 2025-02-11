@@ -64,7 +64,7 @@ int mvRenameFile(const char *source_file, const char *new_name) {
     if (rename(source_file, new_name) == 0) {
         if (option_verbose) {
             printf("DEBUG: -v flag detected, printing move action...\n");
-            printf("Moved: %s -> %s\n", source_file, new_name);
+            printf("renamed: %s -> %s\n", source_file, new_name);
         }
         return 0;
     } else {
@@ -108,7 +108,7 @@ int mvMoveFileToDir(const char *source, const char *destination_dir) {
     if (rename(source, destination) == 0) {
         if (option_verbose) {
             printf("DEBUG: -v flag detected, printing move action...\n");
-            printf("Moved: %s -> %s\n", source, destination);
+            printf("renamed: %s -> %s\n", source, destination);
         }
         return 0;
     } else {
@@ -164,7 +164,7 @@ int mvMoveDirToDir(const char *source_dir, const char *target_dir) {
     if (rename(source_dir, target_path) == 0) {
         if (option_verbose) {
             printf("DEBUG: -v flag detected, printing move action...\n");
-            printf("Moved: %s -> %s\n", source_dir, target_path);
+            printf("renamed: %s -> %s\n", source_dir, target_path);
         }
         return 0;
     } else {
@@ -172,9 +172,9 @@ int mvMoveDirToDir(const char *source_dir, const char *target_dir) {
         return -1;
     }
 
-    if (rename_recursive(source_dir, target_dir) == 0) {
+    if (rename(source_dir, target_dir) == 0) {
         if (option_verbose) {
-            printf("Moved recursively: %s -> %s\n", source_dir, target_dir);
+            printf("renamed: %s -> %s\n", source_dir, target_dir);
         }
         return 0;
     } else {
@@ -194,7 +194,7 @@ int mvRenameDir(const char *source_dir, const char *new_name) {
     if (rename(source_dir, new_name) == 0) {
         if (option_verbose) {
             printf("DEBUG: -v flag detected, printing move action...\n");
-            printf("Renamed directory: %s -> %s\n", source_dir, new_name);
+            printf("renamed: %s -> %s\n", source_dir, new_name);
         }
         return 0;
     } else {
