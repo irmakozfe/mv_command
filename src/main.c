@@ -55,8 +55,15 @@ void read_from_stdin(char *buffer, size_t size) {
 }
 
 void print_help() {
-    printf("usage: ./mv [-f | -i | -n] [-hv] source target\n");
-    printf("\t./mv [-f | -i | -n] [-v] source ... directory\n\n");
+    printf("usage: mv [-f | -i | -n] [-hv] source target\n");
+    printf("\tmv [-f | -i | -n] [-v] source ... directory\n\n");
+    printf("Options:\n");
+    printf("  -f   Force move without confirmation\n");
+    printf("  -i   Interactive mode, prompt before overwrite\n");
+    printf("  -n   No-clobber mode, do not overwrite existing files\n");
+    printf("  -v   Verbose mode, display actions\n");
+    printf("  -b   Backup existing files before overwrite\n");
+    printf("  -h   Display this help message\n");
 }
 
 //bayraklari ayristirmak icin
@@ -104,10 +111,7 @@ int main(int argc, char *argv[]) {
     int non_flag_index = -1; 
     parse_flags(argc, argv, &non_flag_index);
 
-    if (argc == 2 && option_help) {
-        print_help();
-        return 0; 
-    }
+    
 
     if (argc == 2) {
         const char *destination = argv[1];
@@ -137,6 +141,10 @@ int main(int argc, char *argv[]) {
         }
 
         pthread_mutex_destroy(&resource_semaphore);
+        return 0; 
+    }
+    if (argc == 2 && option_help) {
+        print_help();
         return 0; 
     }
 
@@ -232,4 +240,5 @@ int main(int argc, char *argv[]) {
         pthread_mutex_destroy(&resource_semaphore);
         return 0; 
     }
+
 }
