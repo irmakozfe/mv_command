@@ -9,7 +9,6 @@ extern int option_no_clobber;   // -n
 extern int option_verbose;      // -v
 extern int option_help;      // -h
 extern int option_backup; // -b
-// getopt_long için uzun bayraklar tanımı
 extern struct option long_options[];
 
-#endif // GLOBALS_H
+#endif 
